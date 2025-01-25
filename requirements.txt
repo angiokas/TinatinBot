@@ -1,0 +1,6 @@
+discord
+python-dotenv
+transformers
+torch
+pydantic
+bs4
