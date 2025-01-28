@@ -1,6 +1,8 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 from pydantic import BaseModel, Field
 from typing import Annotated
+from discord.ext import commands
+
 
 MODEL_NAME = "EleutherAI/gpt-neo-125M"
 tokenizer = tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
@@ -26,8 +28,16 @@ default_config = GenerationConfig(
     do_sample = True
 )
 
-def generate_text(prompt: str, config: GenerationConfig = default_config) -> str:
-    generation_params = config.model_dump()
-    result = generator(prompt, **generation_params)
-    generated_text = result[0]["generated_text"]
-    return generated_text
+class LLM(commands.Cog):
+    def __init__(self,bot):
+        self.bot = bot
+        
+    @commands.command()
+    async def generate_text(self,ctx, prompt: str, config: GenerationConfig = default_config) -> str:
+        generation_params = config.model_dump()
+        result = generator(prompt, **generation_params)
+        generated_text = result[0]["generated_text"]
+
+        await ctx.send(generated_text)
+    
+    

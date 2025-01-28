@@ -1,6 +1,9 @@
+discord-ext-voice-recv
 discord
 python-dotenv
 transformers
 torch
 pydantic
 bs4
+wave
+asyncio

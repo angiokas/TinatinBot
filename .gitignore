@@ -1,0 +1,5 @@
+.env
+*.py[co]
+*.wav
+web_scraping.py
+NOTES.md
